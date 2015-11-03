@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import be.robinj.restobill.R;
+import be.robinj.restobill.TableActivity;
 import be.robinj.restobill.model.TableEntity;
 
 /**
@@ -56,6 +57,8 @@ public class TableAddPositiveOnClickListener
 		{
 			TableEntity table = new TableEntity (name);
 			table.save ();
+
+			((TableActivity) this.parent).refreshTables ();
 
 			Snackbar.make (this.parent.findViewById (R.id.colaTables), "Table added", Snackbar.LENGTH_SHORT).show ();
 		}

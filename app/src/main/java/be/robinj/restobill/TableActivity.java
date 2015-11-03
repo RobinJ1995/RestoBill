@@ -60,4 +60,14 @@ public class TableActivity
 		
 		return super.onOptionsItemSelected (item);
 	}
+
+	public void refreshTables ()
+	{
+		ListView lvTables = (ListView) this.findViewById (R.id.lvTables);
+		TableAdapter adapter = (TableAdapter) lvTables.getAdapter ();
+
+		adapter.clear ();
+		adapter.addAll (TableEntity.listAll (TableEntity.class));
+		adapter.notifyDataSetChanged ();
+	}
 }

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.support.design.widget.Snackbar;
 
 import be.robinj.restobill.R;
+import be.robinj.restobill.TableActivity;
 import be.robinj.restobill.model.TableEntity;
 
 /**
@@ -37,6 +38,7 @@ public class TableListViewItemLongClickMenuOnClickListener
 				break;
 			case 2: // Remove //
 				table.delete ();
+				((TableActivity) this.parent).refreshTables ();
 
 				Snackbar.make (this.parent.findViewById (R.id.colaTables), "Table removed", Snackbar.LENGTH_SHORT).show ();
 
