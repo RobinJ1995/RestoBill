@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import be.robinj.restobill.adapter.TableAdapter;
 import be.robinj.restobill.listener.TableAddOnClickListener;
+import be.robinj.restobill.listener.TableListViewOnItemClickListener;
 import be.robinj.restobill.listener.TableListViewOnItemLongClickListener;
 import be.robinj.restobill.model.TableEntity;
 
@@ -34,6 +35,7 @@ public class TableActivity
 		btnAddTable.setOnClickListener (new TableAddOnClickListener (this));
 		lvTables.setAdapter (new TableAdapter (this, TableEntity.listAll (TableEntity.class)));
 		lvTables.setOnItemLongClickListener (new TableListViewOnItemLongClickListener (this));
+		lvTables.setOnItemClickListener (new TableListViewOnItemClickListener (this));
 	}
 	
 	@Override
