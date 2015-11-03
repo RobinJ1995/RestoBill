@@ -11,7 +11,8 @@ import java.util.List;
 public class BillEntity
 	extends SugarRecord<BillEntity>
 {
-	public TableEntity table;
+	public TableEntity tableEntity;
+	public boolean closed = false;
 
 	public BillEntity ()
 	{
@@ -19,6 +20,6 @@ public class BillEntity
 
 	public BillEntity (TableEntity table)
 	{
-		this.table = table;
+		this.tableEntity = table;
 	}
 }

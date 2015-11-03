@@ -8,8 +8,8 @@ import com.orm.SugarRecord;
 public class OrderEntity
 	extends SugarRecord<OrderEntity>
 {
-	public BillEntity bill;
-	public ProductEntity product;
+	public BillEntity billEntity;
+	public ProductEntity productEntity;
 
 	public OrderEntity ()
 	{
@@ -17,7 +17,7 @@ public class OrderEntity
 
 	public OrderEntity (BillEntity bill, ProductEntity product)
 	{
-		this.bill = bill;
-		this.product = product;
+		this.billEntity = bill;
+		this.productEntity = product;
 	}
 }
