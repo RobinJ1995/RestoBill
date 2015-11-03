@@ -30,7 +30,7 @@ public class TableListViewOnItemLongClickListener
 		AlertDialog.Builder dlgBuilder = new AlertDialog.Builder (this.parent);
 		dlgBuilder
 			.setTitle (table.name)
-			.setMultiChoiceItems (R.array.tables_listview_item_long_click_menu, null, new TableListViewItemLongClickMenuMultiChoiceClickListener ());
+			.setItems (R.array.tables_listview_item_long_click_menu, new TableListViewItemLongClickMenuOnClickListener (this.parent, id));
 
 		dlgBuilder.create ().show ();
 
