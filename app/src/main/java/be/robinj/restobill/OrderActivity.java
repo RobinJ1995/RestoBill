@@ -39,7 +39,7 @@ public class OrderActivity
 
 		List<BillEntity> bills = BillEntity.find (BillEntity.class, "table_entity = ? AND closed = 0", String.valueOf (tableId));
 		boolean existingBill = false;
-
+		
 		if (bills.size () > 0)
 		{
 			this.bill = bills.get (0);
