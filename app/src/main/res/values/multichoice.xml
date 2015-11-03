@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tables_listview_item_long_click_menu">
+        <item>Reset</item>
+        <item>Check out</item>
+        <item>Remove</item>
+    </string-array>
+</resources>

@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">RestoBill</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="activity_tables_title">Tables</string>
+    <string name="dialog_tables_add_title">Add table</string>
+    <string name="dialog_tables_add_name">Name:</string>
+    <string name="dialog_tables_add_positive">OK</string>
+    <string name="dialog_tables_add_negative">Cancel</string>
+
+</resources>
