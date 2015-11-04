@@ -51,7 +51,7 @@ public class ProductActivity
 		this.products = ProductEntity.listAll (ProductEntity.class);
 
 		gvProducts.setAdapter (new ProductAdapter (this, this.products, this.selected));
-		gvProducts.setOnItemClickListener (new ProductGridViewOnItemClickListener (this.selected));
+		gvProducts.setOnItemClickListener (new ProductGridViewOnItemClickListener (this.selected, btnSubmitProducts));
 		etProductSearch.addTextChangedListener (new ProductSearchTextChangedListener (this.products, (ProductAdapter) gvProducts.getAdapter ()));
 	}
 

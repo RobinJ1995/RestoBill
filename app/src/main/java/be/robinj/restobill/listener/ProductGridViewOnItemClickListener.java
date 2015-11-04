@@ -2,6 +2,7 @@ package be.robinj.restobill.listener;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,10 +20,12 @@ public class ProductGridViewOnItemClickListener
 	implements AdapterView.OnItemClickListener
 {
 	private HashSet<Long> selected;
+	private FloatingActionButton btnSubmitProducts;
 
-	public ProductGridViewOnItemClickListener (HashSet<Long> selected)
+	public ProductGridViewOnItemClickListener (HashSet<Long> selected, FloatingActionButton btnSubmitProducts)
 	{
 		this.selected = selected;
+		this.btnSubmitProducts = btnSubmitProducts;
 	}
 
 	@Override
@@ -34,6 +37,8 @@ public class ProductGridViewOnItemClickListener
 			this.selected.remove (id);
 		else
 			this.selected.add (id);
+
+		this.btnSubmitProducts.setVisibility (this.selected.size () > 0 ? View.VISIBLE : View.GONE);
 
 		((ProductAdapter) adapterView.getAdapter ()).notifyDataSetChanged ();
 	}

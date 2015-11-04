@@ -19,7 +19,8 @@
         I think I ran into a potential bug in Android, here... At least in the emulator when I set
         animateLayoutChanges="true" and I hit the button that should show etProductSearch the other
         content partially runs off the top of the screen, and nothing gets shown.
-        Let's leave the animations out. At least for now.
+        Could also be a mistake in the code somewhere, but if it is, then I can't find it. Let's
+        leave the animations out. At least for now.
     -->
 
     <EditText
