@@ -26,7 +26,6 @@ import be.robinj.restobill.model.ProductEntity;
 public class ProductActivity
 	extends AppCompatActivity
 {
-	private List<ProductEntity> products;
 	private HashSet<Long> selected = new HashSet<Long> ();
 
 	@Override
@@ -48,11 +47,11 @@ public class ProductActivity
 		(new ProductEntity ("Water", 1.5F, "Fresh from the tap")).save ();
 		(new ProductEntity ("Cookie", 2F)).save ();*/
 
-		this.products = ProductEntity.listAll (ProductEntity.class);
+		List<ProductEntity> products = ProductEntity.listAll (ProductEntity.class);
 
-		gvProducts.setAdapter (new ProductAdapter (this, this.products, this.selected));
+		gvProducts.setAdapter (new ProductAdapter (this, products, this.selected));
 		gvProducts.setOnItemClickListener (new ProductGridViewOnItemClickListener (this.selected, btnSubmitProducts));
-		etProductSearch.addTextChangedListener (new ProductSearchTextChangedListener (this.products, (ProductAdapter) gvProducts.getAdapter ()));
+		etProductSearch.addTextChangedListener (new ProductSearchTextChangedListener (products, (ProductAdapter) gvProducts.getAdapter ()));
 	}
 
 	@Override
