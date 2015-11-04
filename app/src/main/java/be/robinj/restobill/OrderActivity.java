@@ -7,10 +7,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ListView;
 
 import java.util.List;
 
+import be.robinj.restobill.adapter.OrderAdapter;
+import be.robinj.restobill.listener.OrderAddOnClickListener;
 import be.robinj.restobill.model.BillEntity;
+import be.robinj.restobill.model.OrderEntity;
 import be.robinj.restobill.model.TableEntity;
 
 public class OrderActivity
@@ -28,6 +32,7 @@ public class OrderActivity
 		getSupportActionBar ().setDisplayHomeAsUpEnabled (true);
 
 		FloatingActionButton btnAddOrder = (FloatingActionButton) this.findViewById (R.id.btnAddOrder);
+		ListView lvOrders = (ListView) this.findViewById (R.id.lvOrders);
 
 		Intent intent = this.getIntent ();
 		long tableId = intent.getLongExtra ("tableId", -1);
@@ -48,11 +53,14 @@ public class OrderActivity
 		else
 		{
 
-			BillEntity bill = new BillEntity (table);
+			this.bill = new BillEntity (table);
 
-			bill.save ();
+			this.bill.save ();
 		}
 
 		Snackbar.make (this.findViewById (R.id.colaOrders), (existingBill ? "Existing" : "New") + " bill opened for " + table.name, Snackbar.LENGTH_SHORT).show ();
+
+		btnAddOrder.setOnClickListener (new OrderAddOnClickListener (this, bill.getId ()));
+		lvOrders.setAdapter (new OrderAdapter (this, OrderEntity.find (OrderEntity.class, "bill_entity = ?", String.valueOf (this.bill.getId ()))));
 	}
 }
