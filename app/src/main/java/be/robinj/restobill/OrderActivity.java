@@ -43,12 +43,10 @@ public class OrderActivity
 			this.finish ();
 
 		List<BillEntity> bills = BillEntity.find (BillEntity.class, "table_entity = ? AND closed = 0", String.valueOf (tableId));
-		boolean existingBill = false;
 		
 		if (bills.size () > 0)
 		{
 			this.bill = bills.get (0);
-			existingBill = true;
 		}
 		else
 		{
@@ -56,9 +54,9 @@ public class OrderActivity
 			this.bill = new BillEntity (table);
 
 			this.bill.save ();
-		}
 
-		Snackbar.make (this.findViewById (R.id.colaOrders), (existingBill ? "Existing" : "New") + " bill opened for " + table.name, Snackbar.LENGTH_SHORT).show ();
+			Snackbar.make (this.findViewById (R.id.colaOrders), "New bill opened for " + table.name, Snackbar.LENGTH_SHORT).show ();
+		}
 
 		btnAddOrder.setOnClickListener (new OrderAddOnClickListener (this, bill.getId ()));
 		lvOrders.setAdapter (new OrderAdapter (this, OrderEntity.find (OrderEntity.class, "bill_entity = ?", String.valueOf (this.bill.getId ()))));

@@ -13,9 +13,14 @@
     tools:showIn="@layout/activity_table"
     tools:context=".TableActivity">
 
-    <ListView
+    <GridView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/lvTables"></ListView>
+        android:id="@+id/gvTables"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:columnWidth="200dp"
+        android:verticalSpacing="4dp"
+        android:horizontalSpacing="4dp"></GridView>
 
 </RelativeLayout>

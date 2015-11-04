@@ -10,7 +10,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import be.robinj.restobill.R;
-import be.robinj.restobill.listener.TableListViewOnItemLongClickListener;
 import be.robinj.restobill.model.TableEntity;
 
 /**
@@ -21,7 +20,7 @@ public class TableAdapter
 {
 	public TableAdapter (Context context, List<TableEntity> tables)
 	{
-		super (context, R.layout.table_listview_item, tables);
+		super (context, R.layout.table_gridview_item, tables);
 	}
 
 	@Override
@@ -30,7 +29,7 @@ public class TableAdapter
 		TableEntity table = this.getItem (position);
 
 		if (view == null)
-			view = LayoutInflater.from (this.getContext ()).inflate (R.layout.table_listview_item, parent, false);
+			view = LayoutInflater.from (this.getContext ()).inflate (R.layout.table_gridview_item, parent, false);
 
 		TextView tvTableListViewItemName = (TextView) view.findViewById (R.id.tvTableListViewItemName);
 		tvTableListViewItemName.setText (table.name);

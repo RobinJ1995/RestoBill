@@ -13,4 +13,14 @@
     tools:showIn="@layout/activity_product"
     tools:context="be.robinj.restobill.ProductActivity">
 
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gvProducts"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:columnWidth="240dp"
+        android:verticalSpacing="4dp"
+        android:horizontalSpacing="4dp"></GridView>
+
 </RelativeLayout>

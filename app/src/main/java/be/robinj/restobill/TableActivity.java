@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import be.robinj.restobill.adapter.TableAdapter;
@@ -30,12 +31,12 @@ public class TableActivity
 		setSupportActionBar (toolbar);
 		
 		FloatingActionButton btnAddTable = (FloatingActionButton) this.findViewById (R.id.btnAddTable);
-		ListView lvTables = (ListView) this.findViewById (R.id.lvTables);
+		GridView gvTables = (GridView) this.findViewById (R.id.gvTables);
 
 		btnAddTable.setOnClickListener (new TableAddOnClickListener (this));
-		lvTables.setAdapter (new TableAdapter (this, TableEntity.listAll (TableEntity.class)));
-		lvTables.setOnItemLongClickListener (new TableListViewOnItemLongClickListener (this));
-		lvTables.setOnItemClickListener (new TableListViewOnItemClickListener (this));
+		gvTables.setAdapter (new TableAdapter (this, TableEntity.listAll (TableEntity.class)));
+		gvTables.setOnItemLongClickListener (new TableListViewOnItemLongClickListener (this));
+		gvTables.setOnItemClickListener (new TableListViewOnItemClickListener (this));
 	}
 	
 	@Override
@@ -65,8 +66,8 @@ public class TableActivity
 
 	public void refreshTables ()
 	{
-		ListView lvTables = (ListView) this.findViewById (R.id.lvTables);
-		TableAdapter adapter = (TableAdapter) lvTables.getAdapter ();
+		GridView gvTables = (GridView) this.findViewById (R.id.gvTables);
+		TableAdapter adapter = (TableAdapter) gvTables.getAdapter ();
 
 		adapter.clear ();
 		adapter.addAll (TableEntity.listAll (TableEntity.class));

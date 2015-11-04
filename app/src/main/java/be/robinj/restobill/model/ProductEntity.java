@@ -10,6 +10,7 @@ public class ProductEntity extends SugarRecord<ProductEntity>
 	public String name;
 	public float price;
 	public String description;
+	public boolean available;
 
 	public ProductEntity ()
 	{
