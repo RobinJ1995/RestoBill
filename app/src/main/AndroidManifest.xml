@@ -38,7 +38,8 @@
             android:name=".OrderActivity"
             android:label="@string/title_activity_order"
             android:parentActivityName=".TableActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="be.robinj.restobill.TableActivity" />
