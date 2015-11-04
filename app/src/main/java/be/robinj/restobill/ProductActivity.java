@@ -10,15 +10,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
 
+import java.util.HashSet;
 import java.util.List;
 
 import be.robinj.restobill.adapter.ProductAdapter;
+import be.robinj.restobill.listener.ProductGridViewOnItemClickListener;
 import be.robinj.restobill.model.ProductEntity;
 
 public class ProductActivity
 	extends AppCompatActivity
 {
-	
+	private HashSet<Long> selected = new HashSet<Long> ();
+
 	@Override
 	protected void onCreate (Bundle savedInstanceState)
 	{
@@ -39,8 +42,8 @@ public class ProductActivity
 
 		List<ProductEntity> products = ProductEntity.listAll (ProductEntity.class);
 
-		gvProducts.setAdapter (new ProductAdapter (this, products));
-
+		gvProducts.setAdapter (new ProductAdapter (this, products, this.selected));
+		gvProducts.setOnItemClickListener (new ProductGridViewOnItemClickListener (this.selected));
 	}
 
 	@Override
