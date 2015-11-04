@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context=".TableActivity">
+    <item android:id="@+id/action_search"
+          android:title="@string/activity_product_search"
+          android:orderInCategory="100"
+          app:showAsAction="always"
+          android:icon="@android:drawable/ic_menu_search" />
+</menu>

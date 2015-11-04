@@ -28,4 +28,20 @@ public class ProductEntity extends SugarRecord<ProductEntity>
 		this.price = price;
 		this.description = description;
 	}
+
+	@Override
+	public boolean equals (Object product)
+	{
+		try
+		{
+			if (this.getId () == ((ProductEntity) product).getId ())
+				return true;
+		}
+		catch (Exception ex)
+		{
+			// No time to handle this properly. If something goes wrong they're probably not equal. //
+		}
+
+		return false;
+	}
 }
