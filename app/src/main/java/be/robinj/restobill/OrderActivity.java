@@ -15,6 +15,7 @@ import be.robinj.restobill.adapter.OrderAdapter;
 import be.robinj.restobill.listener.OrderAddOnClickListener;
 import be.robinj.restobill.model.BillEntity;
 import be.robinj.restobill.model.OrderEntity;
+import be.robinj.restobill.model.ProductEntity;
 import be.robinj.restobill.model.TableEntity;
 
 public class OrderActivity
@@ -58,7 +59,23 @@ public class OrderActivity
 			Snackbar.make (this.findViewById (R.id.colaOrders), "New bill opened for " + table.name, Snackbar.LENGTH_SHORT).show ();
 		}
 
+		List<OrderEntity> orders = OrderEntity.find (OrderEntity.class, "bill_entity = ?", String.valueOf (this.bill.getId ()));
+
 		btnAddOrder.setOnClickListener (new OrderAddOnClickListener (this, bill.getId ()));
-		lvOrders.setAdapter (new OrderAdapter (this, OrderEntity.find (OrderEntity.class, "bill_entity = ?", String.valueOf (this.bill.getId ()))));
+		lvOrders.setAdapter (new OrderAdapter (this, orders));
+	}
+
+	@Override
+	protected void onActivityResult (int requestCode, int resultCode, Intent intent)
+	{
+		if (resultCode == RESULT_OK)
+		{
+			if (requestCode == 1)
+			{
+				int n = intent.getIntExtra ("nProducts", 0);
+
+				Snackbar.make (this.findViewById (R.id.colaOrders), "Added " + n + " order" + (n == 1 ? "" : "s"), Snackbar.LENGTH_SHORT).show ();
+			}
+		}
 	}
 }

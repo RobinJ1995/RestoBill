@@ -30,6 +30,6 @@ public class OrderAddOnClickListener
 		Intent intent = new Intent (this.parent, ProductActivity.class);
 		intent.putExtra ("billId", this.billId);
 
-		this.parent.startActivity (intent);
+		this.parent.startActivityForResult (intent, 1);
 	}
 }

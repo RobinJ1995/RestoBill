@@ -10,6 +10,7 @@ public class OrderEntity
 {
 	public BillEntity billEntity;
 	public ProductEntity productEntity;
+	public short amount = 1;
 
 	public OrderEntity ()
 	{

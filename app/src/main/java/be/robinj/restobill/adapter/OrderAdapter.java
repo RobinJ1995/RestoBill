@@ -33,9 +33,11 @@ public class OrderAdapter
 
 		TextView tvOrderListViewItemProductName = (TextView) view.findViewById (R.id.tvOrderListViewItemProductName);
 		TextView tvOrderListViewItemProductPrice = (TextView) view.findViewById (R.id.tvOrderListViewItemProductPrice);
+		TextView tvOrderListViewItemAmount = (TextView) view.findViewById (R.id.tvOrderListViewItemAmount);
 
 		tvOrderListViewItemProductName.setText (order.productEntity.name);
 		tvOrderListViewItemProductPrice.setText ("€" + order.productEntity.price);
+		tvOrderListViewItemAmount.setText (order.amount == 1 ? "" : "x" + order.amount);
 
 		view.setTag (order.getId ());
 
