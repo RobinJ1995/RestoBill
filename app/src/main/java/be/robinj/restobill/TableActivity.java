@@ -22,9 +22,17 @@ public class TableActivity
 	protected void onCreate (Bundle savedInstanceState)
 	{
 		super.onCreate (savedInstanceState);
-		setContentView (R.layout.activity_table);
+
+		this.setContentView (R.layout.activity_table);
 		Toolbar toolbar = (Toolbar) findViewById (R.id.toolbar);
-		setSupportActionBar (toolbar);
+		this.setSupportActionBar (toolbar);
+
+		if (toolbar != null)
+			toolbar.setTitle (this.getString (R.string.activity_tables_title));
+		if (this.getActionBar () != null)
+			this.getActionBar ().setTitle (this.getString (R.string.activity_tables_title));
+		if (this.getSupportActionBar () != null)
+			this.getSupportActionBar ().setTitle (R.string.activity_tables_title);
 		
 		FloatingActionButton btnAddTable = (FloatingActionButton) this.findViewById (R.id.btnAddTable);
 		GridView gvTables = (GridView) this.findViewById (R.id.gvTables);
