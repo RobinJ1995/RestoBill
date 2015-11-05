@@ -53,7 +53,7 @@ public class ProductActivity
 		(new ProductEntity ("Water", 1.5F, "Fresh from the tap")).save ();
 		(new ProductEntity ("Cookie", 2F)).save ();*/
 
-		List<ProductEntity> products = ProductEntity.listAll (ProductEntity.class);
+		List<ProductEntity> products = ProductEntity.find (ProductEntity.class, null, new String[] {}, null, "name", null);
 
 		btnSubmitProducts.setOnClickListener (new ProductSubmitOnClickListener (this, this.selected, billId));
 		gvProducts.setAdapter (new ProductAdapter (this, products, this.selected));

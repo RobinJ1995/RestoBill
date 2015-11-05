@@ -13,12 +13,12 @@ import be.robinj.restobill.model.TableEntity;
 /**
  * Created by robin on 03/11/15.
  */
-public class TableListViewOnItemClickListener
+public class TableGridViewOnItemClickListener
 	implements AdapterView.OnItemClickListener
 {
 	private Activity parent;
 
-	public TableListViewOnItemClickListener (Activity parent)
+	public TableGridViewOnItemClickListener (Activity parent)
 	{
 		this.parent = parent;
 	}

@@ -11,13 +11,13 @@ import be.robinj.restobill.model.TableEntity;
 /**
  * Created by robin on 03/11/15.
  */
-public class TableListViewItemLongClickMenuOnClickListener
+public class TableGridViewItemLongClickMenuOnClickListener
 	implements DialogInterface.OnClickListener
 {
 	private Activity parent;
 	private long id;
 
-	public TableListViewItemLongClickMenuOnClickListener (Activity parent, long id)
+	public TableGridViewItemLongClickMenuOnClickListener (Activity parent, long id)
 	{
 		this.parent = parent;
 		this.id = id;

@@ -11,12 +11,12 @@ import be.robinj.restobill.model.TableEntity;
 /**
  * Created by robin on 03/11/15.
  */
-public class TableListViewOnItemLongClickListener
+public class TableGridViewOnItemLongClickListener
 	implements AdapterView.OnItemLongClickListener
 {
 	private Activity parent;
 
-	public TableListViewOnItemLongClickListener (Activity parent)
+	public TableGridViewOnItemLongClickListener (Activity parent)
 	{
 		this.parent = parent;
 	}
@@ -30,7 +30,7 @@ public class TableListViewOnItemLongClickListener
 		AlertDialog.Builder dlgBuilder = new AlertDialog.Builder (this.parent);
 		dlgBuilder
 			.setTitle (table.name)
-			.setItems (R.array.tables_listview_item_long_click_menu, new TableListViewItemLongClickMenuOnClickListener (this.parent, id));
+			.setItems (R.array.tables_gridview_item_long_click_menu, new TableGridViewItemLongClickMenuOnClickListener (this.parent, id));
 
 		dlgBuilder.create ().show ();
 

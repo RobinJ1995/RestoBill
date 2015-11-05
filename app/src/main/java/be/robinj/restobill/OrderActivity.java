@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import java.util.List;
@@ -74,8 +75,20 @@ public class OrderActivity
 			{
 				int n = intent.getIntExtra ("nProducts", 0);
 
+				this.refreshOrders ();
+
 				Snackbar.make (this.findViewById (R.id.colaOrders), "Added " + n + " order" + (n == 1 ? "" : "s"), Snackbar.LENGTH_SHORT).show ();
 			}
 		}
+	}
+
+	public void refreshOrders ()
+	{
+		ListView lvOrders = (ListView) this.findViewById (R.id.lvOrders);
+		OrderAdapter adapter = (OrderAdapter) lvOrders.getAdapter ();
+
+		adapter.clear ();
+		adapter.addAll (OrderEntity.find (OrderEntity.class, "bill_entity = ?", String.valueOf (this.bill.getId ())));
+		adapter.notifyDataSetChanged ();
 	}
 }

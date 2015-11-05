@@ -2,20 +2,16 @@ package be.robinj.restobill;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.ListView;
 
 import be.robinj.restobill.adapter.TableAdapter;
 import be.robinj.restobill.listener.TableAddOnClickListener;
-import be.robinj.restobill.listener.TableListViewOnItemClickListener;
-import be.robinj.restobill.listener.TableListViewOnItemLongClickListener;
+import be.robinj.restobill.listener.TableGridViewOnItemClickListener;
+import be.robinj.restobill.listener.TableGridViewOnItemLongClickListener;
 import be.robinj.restobill.model.TableEntity;
 
 public class TableActivity
@@ -35,8 +31,8 @@ public class TableActivity
 
 		btnAddTable.setOnClickListener (new TableAddOnClickListener (this));
 		gvTables.setAdapter (new TableAdapter (this, TableEntity.listAll (TableEntity.class)));
-		gvTables.setOnItemLongClickListener (new TableListViewOnItemLongClickListener (this));
-		gvTables.setOnItemClickListener (new TableListViewOnItemClickListener (this));
+		gvTables.setOnItemLongClickListener (new TableGridViewOnItemLongClickListener (this));
+		gvTables.setOnItemClickListener (new TableGridViewOnItemClickListener (this));
 	}
 	
 	@Override

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import be.robinj.restobill.R;
@@ -36,7 +37,7 @@ public class OrderAdapter
 		TextView tvOrderListViewItemAmount = (TextView) view.findViewById (R.id.tvOrderListViewItemAmount);
 
 		tvOrderListViewItemProductName.setText (order.productEntity.name);
-		tvOrderListViewItemProductPrice.setText ("€" + order.productEntity.price);
+		tvOrderListViewItemProductPrice.setText ("€" + (new DecimalFormat ("#.00")).format (order.amount * order.productEntity.price));
 		tvOrderListViewItemAmount.setText (order.amount == 1 ? "" : "x" + order.amount);
 
 		view.setTag (order.getId ());

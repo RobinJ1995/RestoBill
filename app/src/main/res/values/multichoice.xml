@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="tables_listview_item_long_click_menu">
+    <string-array name="tables_gridview_item_long_click_menu">
         <item>Check out</item>
         <item>Reset</item>
         <item>Remove</item>
