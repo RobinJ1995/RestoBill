@@ -16,6 +16,8 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/lvOrders"></ListView>
+        android:id="@+id/lvOrders"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="4dp"></ListView>
 
 </RelativeLayout>

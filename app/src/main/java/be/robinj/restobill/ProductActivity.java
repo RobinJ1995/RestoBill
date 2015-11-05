@@ -21,6 +21,7 @@ import java.util.List;
 import be.robinj.restobill.adapter.ProductAdapter;
 import be.robinj.restobill.listener.ProductGridViewOnItemClickListener;
 import be.robinj.restobill.listener.ProductSearchTextChangedListener;
+import be.robinj.restobill.listener.ProductSubmitOnClickListener;
 import be.robinj.restobill.model.ProductEntity;
 
 public class ProductActivity
@@ -41,6 +42,11 @@ public class ProductActivity
 		GridView gvProducts = (GridView) this.findViewById (R.id.gvProducts);
 		EditText etProductSearch = (EditText) this.findViewById (R.id.etProductSearch);
 
+		long billId = this.getIntent ().getLongExtra ("billId", -1);
+
+		if (billId == -1) // Shouldn't happen //
+			this.finish ();
+
 		/*(new ProductEntity ("Pizza", 10F, "Dough with tomato sauce and other stuff...")).save ();
 		(new ProductEntity ("Gnocci", 8.5F, "Some kind of pasta thing")).save ();
 		(new ProductEntity ("Bread", 1F)).save ();
@@ -49,6 +55,7 @@ public class ProductActivity
 
 		List<ProductEntity> products = ProductEntity.listAll (ProductEntity.class);
 
+		btnSubmitProducts.setOnClickListener (new ProductSubmitOnClickListener (this, this.selected, billId));
 		gvProducts.setAdapter (new ProductAdapter (this, products, this.selected));
 		gvProducts.setOnItemClickListener (new ProductGridViewOnItemClickListener (this.selected, btnSubmitProducts));
 		etProductSearch.addTextChangedListener (new ProductSearchTextChangedListener (products, (ProductAdapter) gvProducts.getAdapter ()));
