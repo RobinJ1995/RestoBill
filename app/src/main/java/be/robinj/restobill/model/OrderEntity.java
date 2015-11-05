@@ -21,4 +21,9 @@ public class OrderEntity
 		this.billEntity = bill;
 		this.productEntity = product;
 	}
+
+	public float getPrice ()
+	{
+		return this.amount * this.productEntity.price;
+	}
 }

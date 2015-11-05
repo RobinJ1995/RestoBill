@@ -10,5 +10,6 @@
     <string name="activity_order_title">Orders</string>
     <string name="activity_product_title">Add order</string>
     <string name="activity_product_search">Search...</string>
+    <string name="dialog_order_amount_title">Change amount</string>
 
 </resources>
