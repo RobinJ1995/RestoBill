@@ -1,7 +1,10 @@
 package be.robinj.restobill;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -63,6 +66,35 @@ public class TableActivity
 		if (id == R.id.action_settings)
 		{
 			return true;
+		}
+		else if (id == R.id.action_manage)
+		{
+			AlertDialog.Builder alertDialog = new AlertDialog.Builder (this);
+			alertDialog
+				.setTitle (this.getString (R.string.action_manage))
+				.setItems (new String[] {"Tables", "Products"}, new DialogInterface.OnClickListener ()
+				{
+					@Override
+					public void onClick (DialogInterface dialog, int which)
+					{
+						switch (which)
+						{
+							case 0:
+							{
+								Intent in = new Intent (TableActivity.this, TableManageActivity.class);
+								startActivity (in);
+								break;
+							}
+							case 1:
+							{
+								Intent in = new Intent (TableActivity.this, ProductManageActivity.class);
+								startActivity (in);
+								break;
+							} // Just containing the in variable to its scope //
+						}
+					}
+				});
+			alertDialog.show ();
 		}
 		
 		return super.onOptionsItemSelected (item);
