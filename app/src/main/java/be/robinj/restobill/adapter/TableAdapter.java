@@ -10,6 +10,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import be.robinj.restobill.R;
+import be.robinj.restobill.model.BillEntity;
+import be.robinj.restobill.model.OrderEntity;
 import be.robinj.restobill.model.TableEntity;
 
 /**
@@ -32,9 +34,15 @@ public class TableAdapter
 			view = LayoutInflater.from (this.getContext ()).inflate (R.layout.table_gridview_item, parent, false);
 
 		TextView tvTableListViewItemName = (TextView) view.findViewById (R.id.tvTableListViewItemName);
-		tvTableListViewItemName.setText (table.name);
+		tvTableListViewItemName.setText(table.name);
 
-		view.setTag (table.getId ());
+		List<BillEntity> bt = BillEntity.find(BillEntity.class, "table_entity = ?", String.valueOf(table.getId()));
+		if (bt.size() > 0) {
+			System.out.println(bt.get(0).getId());
+		}
+
+
+		view.setTag(table.getId());
 
 		return view;
 	}

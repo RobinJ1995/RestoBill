@@ -1,5 +1,6 @@
 package be.robinj.restobill;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +9,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,10 +21,15 @@ import java.util.HashSet;
 import java.util.List;
 
 import be.robinj.restobill.adapter.ProductAdapter;
+import be.robinj.restobill.adapter.TableAdapter;
+import be.robinj.restobill.listener.ProductAddOnClickedListener;
 import be.robinj.restobill.listener.ProductGridViewOnItemClickListener;
 import be.robinj.restobill.listener.ProductSearchTextChangedListener;
 import be.robinj.restobill.listener.ProductSubmitOnClickListener;
+import be.robinj.restobill.listener.TableAddNegativeOnClickListener;
+import be.robinj.restobill.listener.TableAddPositiveOnClickListener;
 import be.robinj.restobill.model.ProductEntity;
+import be.robinj.restobill.model.TableEntity;
 
 public class ProductActivity
 	extends AppCompatActivity
@@ -101,5 +108,14 @@ public class ProductActivity
 
 		return super.onOptionsItemSelected (menuItem);
 	}
-	
+	public void refreshProducts ()
+	{
+
+		GridView gvProducts = (GridView) this.findViewById (R.id.gvProducts);
+		ProductAdapter adapter = (ProductAdapter) gvProducts.getAdapter ();
+
+		adapter.clear ();
+		adapter.addAll (ProductEntity.listAll(ProductEntity.class));
+		adapter.notifyDataSetChanged ();
+	}
 }

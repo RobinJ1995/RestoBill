@@ -1,5 +1,8 @@
 package be.robinj.restobill;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -63,6 +66,25 @@ public class TableActivity
 		if (id == R.id.action_settings)
 		{
 			return true;
+		} else if (id == R.id.action_manage)
+		{
+			AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+			alertDialog.setItems(new String[]{"Manage Tables", "Manage Products"}, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					switch(which) {
+						case 0:
+							Intent in = new Intent(TableActivity.this, TableManageActivity.class);
+							startActivity(in);
+							break;
+						case 1:
+							in = new Intent(TableActivity.this, ProductManageActivity.class);
+							startActivity(in);
+							break;
+					}
+				}
+			});
+			alertDialog.show();
 		}
 		
 		return super.onOptionsItemSelected (item);
