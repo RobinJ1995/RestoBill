@@ -13,5 +13,7 @@
     <string name="dialog_order_amount_title">Change amount</string>
     <string name="dialog_checkout_title">Checkout</string>
     <string name="dialog_checkout_total_price">Total price</string>
+    <string name="dialog_checkout_positive">Proceed</string>
+    <string name="dialog_checkout_negative">Cancel</string>
 
 </resources>

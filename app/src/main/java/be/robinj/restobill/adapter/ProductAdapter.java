@@ -46,7 +46,7 @@ public class ProductAdapter
 		TextView tvProductGridViewItemDescription = (TextView) view.findViewById (R.id.tvProductGridViewItemDescription);
 
 		tvProductGridViewItemName.setText (product.name);
-		tvProductGridViewItemPrice.setText ("€" + (new DecimalFormat ("#.00")).format (product.price));
+		tvProductGridViewItemPrice.setText ("€" + (new DecimalFormat ("0.00")).format (product.price));
 		tvProductGridViewItemDescription.setText (product.description);
 
 		CardView cvProductGridViewItem = (CardView) view.findViewById (R.id.cvProductGridViewItem);

@@ -3,7 +3,7 @@
     <string-array name="tables_gridview_item_long_click_menu">
         <item>Check out</item>
         <item>Reset</item>
-        <item>Remove</item>
+        <!--<item>Remove</item>-->
     </string-array>
 
     <string-array name="order_listview_item_long_click_menu">
