@@ -106,7 +106,7 @@ public class OrderActivity
 		switch (menuItem.getItemId ())
 		{
 			case R.id.action_checkout:
-				//TODO//
+				this.bill.startCheckout (this);
 
 				return true;
 		}

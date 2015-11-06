@@ -11,5 +11,7 @@
     <string name="activity_product_title">Add order</string>
     <string name="activity_product_search">Search...</string>
     <string name="dialog_order_amount_title">Change amount</string>
+    <string name="dialog_checkout_title">Checkout</string>
+    <string name="dialog_checkout_total_price">Total price</string>
 
 </resources>
