@@ -239,7 +239,6 @@ public class API
 				if (! strId.isEmpty ())
 				{
 					long id = Long.parseLong (strId);
-					Log.e ("missing", "syncId" + id);
 					List<TableEntity> list = TableEntity.find (TableEntity.class, "sync_id = ?", String.valueOf (id));
 
 					if (list.size () > 0)
