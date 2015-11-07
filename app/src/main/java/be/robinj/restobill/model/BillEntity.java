@@ -14,6 +14,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.robinj.restobill.API;
 import be.robinj.restobill.OrderActivity;
 import be.robinj.restobill.R;
 import be.robinj.restobill.adapter.CheckoutProductAdapter;
@@ -65,5 +66,25 @@ public class BillEntity
 
 		AlertDialog dialog = dlgBuilder.create ();
 		dialog.show ();
+	}
+
+	@Override
+	public void save ()
+	{
+		super.save ();
+
+		final BillEntity bill = this;
+
+		Runnable runnable = new Runnable ()
+		{
+			@Override
+			public void run ()
+			{
+				(new API ("http://10.0.2.2:8000/")).saveBill (bill);
+			}
+		};
+		Thread thread = new Thread (runnable);
+
+		thread.start ();
 	}
 }

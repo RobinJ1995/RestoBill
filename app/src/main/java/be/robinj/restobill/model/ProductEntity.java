@@ -2,6 +2,8 @@ package be.robinj.restobill.model;
 
 import com.orm.SugarRecord;
 
+import be.robinj.restobill.API;
+
 /**
  * Created by robin on 03/11/15.
  */
@@ -43,5 +45,25 @@ public class ProductEntity extends SugarRecord<ProductEntity>
 		}
 
 		return false;
+	}
+
+	@Override
+	public void save ()
+	{
+		super.save ();
+
+		final ProductEntity product = this;
+
+		Runnable runnable = new Runnable ()
+		{
+			@Override
+			public void run ()
+			{
+				(new API ("http://10.0.2.2:8000/")).saveProduct (product);
+			}
+		};
+		Thread thread = new Thread (runnable);
+
+		thread.start ();
 	}
 }

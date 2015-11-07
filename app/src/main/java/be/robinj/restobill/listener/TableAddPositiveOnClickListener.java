@@ -64,7 +64,7 @@ public class TableAddPositiveOnClickListener
 			else
 				((TableManageActivity) this.parent).refreshTables ();
 
-			Snackbar.make (this.parent.findViewById (R.id.colaTables), "Table added", Snackbar.LENGTH_SHORT).show ();
+			//Snackbar.make (this.parent.findViewById (R.id.colaTables), "Table added", Snackbar.LENGTH_SHORT).show ();
 		}
 	}
 }
