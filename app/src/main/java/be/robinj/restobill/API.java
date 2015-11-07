@@ -141,48 +141,76 @@ public class API
 
 	public void saveTable (TableEntity table)
 	{
-		HashMap<String, String> parameters = new HashMap<String, String> ();
-		parameters.put ("id", String.valueOf (table.getId ()));
-		parameters.put ("name", table.name);
-		parameters.put ("syncId", String.valueOf (table.syncId));
+		try
+		{
+			HashMap<String, String> parameters = new HashMap<String, String> ();
+			parameters.put ("id", String.valueOf (table.getId ()));
+			parameters.put ("name", table.name);
+			parameters.put ("syncId", String.valueOf (table.syncId));
 
-		this.doRequest ("saveTable.php", parameters);
+			this.doRequest ("saveTable.php", parameters);
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace ();
+		}
 	}
 
 	public void saveProduct (ProductEntity product)
 	{
-		HashMap<String, String> parameters = new HashMap<String, String> ();
-		parameters.put ("id", String.valueOf (product.getId ()));
-		parameters.put ("name", product.name);
-		parameters.put ("price", new DecimalFormat ("0.00").format (product.price));
-		parameters.put ("description", product.description);
-		parameters.put ("available", product.available ? "1" : "0");
-		parameters.put ("syncId", String.valueOf (product.syncId));
+		try
+		{
+			HashMap<String, String> parameters = new HashMap<String, String> ();
+			parameters.put ("id", String.valueOf (product.getId ()));
+			parameters.put ("name", product.name);
+			parameters.put ("price", new DecimalFormat ("0.00").format (product.price));
+			parameters.put ("description", product.description);
+			parameters.put ("available", product.available ? "1" : "0");
+			parameters.put ("syncId", String.valueOf (product.syncId));
 
-		this.doRequest ("saveProduct.php", parameters);
+			this.doRequest ("saveProduct.php", parameters);
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace ();
+		}
 	}
 
 	public void saveOrder (OrderEntity order)
 	{
-		HashMap<String, String> parameters = new HashMap<String, String> ();
-		parameters.put ("id", String.valueOf (order.getId ()));
-		parameters.put ("product_id", String.valueOf (order.productEntity.getId ()));
-		parameters.put ("bill_id", String.valueOf (order.billEntity.getId ()));
-		parameters.put ("amount", String.valueOf (order.amount));
-		parameters.put ("syncId", String.valueOf (order.syncId));
+		try
+		{
+			HashMap<String, String> parameters = new HashMap<String, String> ();
+			parameters.put ("id", String.valueOf (order.getId ()));
+			parameters.put ("product_id", String.valueOf (order.productEntity.getId ()));
+			parameters.put ("bill_id", String.valueOf (order.billEntity.getId ()));
+			parameters.put ("amount", String.valueOf (order.amount));
+			parameters.put ("syncId", String.valueOf (order.syncId));
 
-		this.doRequest ("saveOrder.php", parameters);
+			this.doRequest ("saveOrder.php", parameters);
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace ();
+		}
 	}
 
 	public void saveBill (BillEntity bill)
 	{
-		HashMap<String, String> parameters = new HashMap<String, String> ();
-		parameters.put ("id", String.valueOf (bill.getId ()));
-		parameters.put ("table_id", String.valueOf (bill.tableEntity.getId ()));
-		parameters.put ("closed", bill.closed ? "1" : "0");
-		parameters.put ("syncId", String.valueOf (bill.syncId));
+		try
+		{
+			HashMap<String, String> parameters = new HashMap<String, String> ();
+			parameters.put ("id", String.valueOf (bill.getId ()));
+			parameters.put ("table_id", String.valueOf (bill.tableEntity.getId ()));
+			parameters.put ("closed", bill.closed ? "1" : "0");
+			parameters.put ("syncId", String.valueOf (bill.syncId));
 
-		this.doRequest ("saveBill.php", parameters);
+			this.doRequest ("saveBill.php", parameters);
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace ();
+		}
 	}
 
 	public void startSyncThread ()
@@ -383,34 +411,62 @@ public class API
 
 	public void removeTable (TableEntity table)
 	{
-		HashMap<String, String> parameters = new HashMap<String, String> ();
-		parameters.put ("id", String.valueOf (table.syncId));
+		try
+		{
+			HashMap<String, String> parameters = new HashMap<String, String> ();
+			parameters.put ("id", String.valueOf (table.syncId));
 
-		this.doRequest ("removeTable.php", parameters);
+			this.doRequest ("removeTable.php", parameters);
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace ();
+		}
 	}
 
 	public void removeProduct (ProductEntity product)
 	{
-		HashMap<String, String> parameters = new HashMap<String, String> ();
-		parameters.put ("id", String.valueOf (product.syncId));
+		try
+		{
+			HashMap<String, String> parameters = new HashMap<String, String> ();
+			parameters.put ("id", String.valueOf (product.syncId));
 
-		this.doRequest ("removeProduct.php", parameters);
+			this.doRequest ("removeProduct.php", parameters);
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace ();
+		}
 	}
 
 	public void removeOrder (OrderEntity order)
 	{
-		HashMap<String, String> parameters = new HashMap<String, String> ();
-		parameters.put ("id", String.valueOf (order.syncId));
+		try
+		{
+			HashMap<String, String> parameters = new HashMap<String, String> ();
+			parameters.put ("id", String.valueOf (order.syncId));
 
-		this.doRequest ("removeOrder.php", parameters);
+			this.doRequest ("removeOrder.php", parameters);
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace ();
+		}
 	}
 
 	public void removeBill (BillEntity bill)
 	{
-		HashMap<String, String> parameters = new HashMap<String, String> ();
-		parameters.put ("id", String.valueOf (bill.syncId));
+		try
+		{
+			HashMap<String, String> parameters = new HashMap<String, String> ();
+			parameters.put ("id", String.valueOf (bill.syncId));
 
-		this.doRequest ("removeBill.php", parameters);
+			this.doRequest ("removeBill.php", parameters);
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace ();
+		}
 	}
 
 	public void checkRemovals () throws IOException // Dirty hack... but no time to find a better way //
