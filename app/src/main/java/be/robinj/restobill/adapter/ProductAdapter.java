@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import be.robinj.restobill.R;
+import be.robinj.restobill.SettingsActivity;
 import be.robinj.restobill.model.OrderEntity;
 import be.robinj.restobill.model.ProductEntity;
 
@@ -46,7 +47,7 @@ public class ProductAdapter
 		TextView tvProductGridViewItemDescription = (TextView) view.findViewById (R.id.tvProductGridViewItemDescription);
 
 		tvProductGridViewItemName.setText (product.name);
-		tvProductGridViewItemPrice.setText ("€" + (new DecimalFormat ("0.00")).format (product.price));
+		tvProductGridViewItemPrice.setText (SettingsActivity.getCurrency(getContext()) + (new DecimalFormat ("0.00")).format (product.price));
 		tvProductGridViewItemDescription.setText (product.description);
 
 		CardView cvProductGridViewItem = (CardView) view.findViewById (R.id.cvProductGridViewItem);

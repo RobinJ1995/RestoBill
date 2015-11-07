@@ -148,7 +148,7 @@ public class OrderActivity
 			for (OrderEntity order : orders)
 				totalPrice += order.getPrice ();
 
-			action_checkout.setTitle ("€" + new DecimalFormat ("0.00").format (totalPrice));
+			action_checkout.setTitle (SettingsActivity.getCurrency (this) + new DecimalFormat ("0.00").format (totalPrice));
 		}
 	}
 

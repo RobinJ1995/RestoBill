@@ -11,6 +11,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import be.robinj.restobill.R;
+import be.robinj.restobill.SettingsActivity;
 import be.robinj.restobill.model.OrderEntity;
 
 /**
@@ -39,8 +40,8 @@ public class CheckoutProductAdapter
 
 		tvCheckoutGridViewItemProductName.setText (order.productEntity.name);
 		tvCheckoutGridViewItemAmount.setText ("x" + order.amount);
-		tvCheckoutGridViewItemProductPrice.setText ("€" + (new DecimalFormat ("0.00")).format (order.productEntity.price));
-		tvCheckoutGridViewItemProductTotalPrice.setText ("€" + (new DecimalFormat ("0.00")).format (order.getPrice ()));
+		tvCheckoutGridViewItemProductPrice.setText (SettingsActivity.getCurrency(getContext()) + (new DecimalFormat ("0.00")).format (order.productEntity.price));
+		tvCheckoutGridViewItemProductTotalPrice.setText (SettingsActivity.getCurrency(getContext()) + (new DecimalFormat ("0.00")).format (order.getPrice ()));
 
 		view.setTag (order.getId ());
 

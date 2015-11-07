@@ -17,6 +17,7 @@ import java.util.List;
 import be.robinj.restobill.API;
 import be.robinj.restobill.OrderActivity;
 import be.robinj.restobill.R;
+import be.robinj.restobill.SettingsActivity;
 import be.robinj.restobill.adapter.CheckoutProductAdapter;
 import be.robinj.restobill.listener.CheckoutNegativeOnClickListener;
 import be.robinj.restobill.listener.CheckoutPositiveOnClickListener;
@@ -63,7 +64,7 @@ public class BillEntity
 			totalPrice += order.getPrice ();
 
 		lvCheckoutProducts.setAdapter (new CheckoutProductAdapter (activity, orders));
-		tvCheckoutTotalPrice.setText ("€" + new DecimalFormat ("0.00").format (totalPrice));
+		tvCheckoutTotalPrice.setText (SettingsActivity.getCurrency(activity) + new DecimalFormat ("0.00").format (totalPrice));
 
 		AlertDialog dialog = dlgBuilder.create ();
 		dialog.show ();
