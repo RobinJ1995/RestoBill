@@ -1,7 +1,7 @@
 <?php
 require_once ('init.php');
 
-$query = $db->prepare ('INSERT INTO TABLE (id, name, price, description, available) VALUES (:id, :name, :price, :description, :available);');
+$query = $db->prepare ('INSERT INTO TABLE (name, price, description, available, syncId) VALUES (:name, :price, :description, :available, :id);');
 $query->bindValue (':id', $_POST['id']);
 $query->bindValue (':name', $_POST['name']);
 $query->bindValue (':price', $_POST['price']);

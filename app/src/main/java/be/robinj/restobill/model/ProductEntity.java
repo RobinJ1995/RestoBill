@@ -1,5 +1,7 @@
 package be.robinj.restobill.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.orm.SugarRecord;
 
 import be.robinj.restobill.API;
@@ -9,6 +11,7 @@ import be.robinj.restobill.API;
  */
 public class ProductEntity extends SugarRecord<ProductEntity>
 {
+	public Long syncId = null;
 	public String name;
 	public float price;
 	public String description;
@@ -50,20 +53,35 @@ public class ProductEntity extends SugarRecord<ProductEntity>
 	@Override
 	public void save ()
 	{
+		this.save (true);
+	}
+
+	public void save (boolean sync)
+	{
 		super.save ();
 
-		final ProductEntity product = this;
-
-		Runnable runnable = new Runnable ()
+		if (this.syncId == null)
 		{
-			@Override
-			public void run ()
-			{
-				(new API ("http://10.0.2.2:8000/")).saveProduct (product);
-			}
-		};
-		Thread thread = new Thread (runnable);
+			this.syncId = this.getId ();
 
-		thread.start ();
+			this.save (false);
+		}
+
+		if (sync)
+		{
+			final ProductEntity product = this;
+
+			Runnable runnable = new Runnable ()
+			{
+				@Override
+				public void run ()
+				{
+					(new API ("http://10.0.2.2:8000/")).saveProduct (product);
+				}
+			};
+			Thread thread = new Thread (runnable);
+
+			thread.start ();
+		}
 	}
 }

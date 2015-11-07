@@ -28,6 +28,7 @@ import be.robinj.restobill.listener.OrderListViewItemLongClickMenuOnClickListene
 public class BillEntity
 	extends SugarRecord<BillEntity>
 {
+	public Long syncId = null;
 	public TableEntity tableEntity;
 	public boolean closed = false;
 
@@ -71,20 +72,35 @@ public class BillEntity
 	@Override
 	public void save ()
 	{
+		this.save (true);
+	}
+
+	public void save (boolean sync)
+	{
 		super.save ();
 
-		final BillEntity bill = this;
-
-		Runnable runnable = new Runnable ()
+		if (this.syncId == null)
 		{
-			@Override
-			public void run ()
-			{
-				(new API ("http://10.0.2.2:8000/")).saveBill (bill);
-			}
-		};
-		Thread thread = new Thread (runnable);
+			this.syncId = this.getId ();
 
-		thread.start ();
+			this.save (false);
+		}
+
+		if (sync)
+		{
+			final BillEntity bill = this;
+
+			Runnable runnable = new Runnable ()
+			{
+				@Override
+				public void run ()
+				{
+					(new API ("http://10.0.2.2:8000/")).saveBill (bill);
+				}
+			};
+			Thread thread = new Thread (runnable);
+
+			thread.start ();
+		}
 	}
 }

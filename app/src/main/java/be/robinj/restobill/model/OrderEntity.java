@@ -10,6 +10,7 @@ import be.robinj.restobill.API;
 public class OrderEntity
 	extends SugarRecord<OrderEntity>
 {
+	public Long syncId = null;
 	public BillEntity billEntity;
 	public ProductEntity productEntity;
 	public short amount = 1;
@@ -32,20 +33,35 @@ public class OrderEntity
 	@Override
 	public void save ()
 	{
+		this.save (true);
+	}
+
+	public void save (boolean sync)
+	{
 		super.save ();
 
-		final OrderEntity order = this;
-
-		Runnable runnable = new Runnable ()
+		if (this.syncId == null)
 		{
-			@Override
-			public void run ()
-			{
-				(new API ("http://10.0.2.2:8000/")).saveOrder (order);
-			}
-		};
-		Thread thread = new Thread (runnable);
+			this.syncId = this.getId ();
 
-		thread.start ();
+			this.save (false);
+		}
+
+		if (sync)
+		{
+			final OrderEntity order = this;
+
+			Runnable runnable = new Runnable ()
+			{
+				@Override
+				public void run ()
+				{
+					(new API ("http://10.0.2.2:8000/")).saveOrder (order);
+				}
+			};
+			Thread thread = new Thread (runnable);
+
+			thread.start ();
+		}
 	}
 }

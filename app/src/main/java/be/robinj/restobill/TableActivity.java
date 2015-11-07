@@ -44,6 +44,8 @@ public class TableActivity
 		gvTables.setAdapter (new TableAdapter (this, TableEntity.listAll (TableEntity.class)));
 		gvTables.setOnItemLongClickListener (new TableGridViewOnItemLongClickListener (this));
 		gvTables.setOnItemClickListener (new TableGridViewOnItemClickListener (this));
+
+		(new API (this)).startSyncThread ();
 	}
 	
 	@Override
