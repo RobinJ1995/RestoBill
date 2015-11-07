@@ -2,6 +2,7 @@ package be.robinj.restobill;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -20,13 +21,21 @@ import be.robinj.restobill.model.TableEntity;
 public class TableActivity
 	extends AppCompatActivity
 {
-	
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		refreshTables();
+	}
+
 	@Override
 	protected void onCreate (Bundle savedInstanceState)
 	{
 		super.onCreate (savedInstanceState);
 
-		this.setContentView (R.layout.activity_table);
+		this.setContentView(R.layout.activity_table);
+		showFirstStartSettings();
+
 		Toolbar toolbar = (Toolbar) findViewById (R.id.toolbar);
 		this.setSupportActionBar (toolbar);
 
@@ -50,7 +59,7 @@ public class TableActivity
 	public boolean onCreateOptionsMenu (Menu menu)
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater ().inflate (R.menu.menu_table, menu);
+		getMenuInflater ().inflate(R.menu.menu_table, menu);
 		return true;
 	}
 	
@@ -110,5 +119,17 @@ public class TableActivity
 		adapter.clear ();
 		adapter.addAll (TableEntity.listAll (TableEntity.class));
 		adapter.notifyDataSetChanged ();
+	}
+
+	public void showFirstStartSettings() {
+		SharedPreferences sp = this.getSharedPreferences("firstart", MODE_PRIVATE);
+		if(sp.getBoolean("firststart", true)) {
+			SharedPreferences.Editor editor = sp.edit();
+			editor.putBoolean("firststart", false);
+			editor.apply();
+
+			Intent in = new Intent(this, FirstStartActivity.class);
+			startActivityForResult(in, 1);
+		}
 	}
 }

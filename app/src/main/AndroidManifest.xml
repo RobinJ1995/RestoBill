@@ -78,6 +78,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="be.robinj.restobill.TableActivity" />
         </activity>
+        <activity android:name=".FirstStartActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="be.robinj.restobill.TableActivity" />
+        </activity>
     </application>
 
 </manifest>
