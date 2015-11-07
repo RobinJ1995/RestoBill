@@ -22,46 +22,39 @@ public class TableManageActivity
 	@Override
 	protected void onCreate (Bundle savedInstanceState)
 	{
-		super.onCreate (savedInstanceState);
-		setContentView (R.layout.activity_table_manage);
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_table_manage);
 		Toolbar toolbar = (Toolbar) findViewById (R.id.toolbar);
 		setSupportActionBar (toolbar);
-		getSupportActionBar ().setDisplayHomeAsUpEnabled (true);
+		getSupportActionBar ().setDisplayHomeAsUpEnabled(true);
 		
-		FloatingActionButton btnAddTable = (FloatingActionButton) findViewById (R.id.btnAddTable);
-		btnAddTable.setOnClickListener (new TableAddOnClickListener (this));
+		FloatingActionButton btnAddTable = (FloatingActionButton) findViewById(R.id.btnAddTable);
+		btnAddTable.setOnClickListener(new TableAddOnClickListener(this));
 
 		GridView gvTables = (GridView) this.findViewById (R.id.gvManageTables);
 
-		gvTables.setAdapter (new ManageTableAdapter (this, TableEntity.listAll (TableEntity.class)));
-		gvTables.setOnItemLongClickListener (new AdapterView.OnItemLongClickListener ()
-		{
+		gvTables.setAdapter(new ManageTableAdapter(this, TableEntity.listAll(TableEntity.class)));
+		gvTables.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
-			public boolean onItemLongClick (AdapterView<?> parent, View view, int position, long id)
-			{
-				AlertDialog.Builder adb = new AlertDialog.Builder (TableManageActivity.this);
-				adb.setTitle ("Remove table?");
-				final long tableId = (long) view.getTag ();
-				adb.setPositiveButton (getString (android.R.string.yes), new DialogInterface.OnClickListener ()
-				{
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				AlertDialog.Builder adb = new AlertDialog.Builder(TableManageActivity.this);
+				adb.setTitle("Remove table?");
+				final long tableId = (long) view.getTag();
+				adb.setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
 					@Override
-					public void onClick (DialogInterface dialog, int which)
-					{
-						TableEntity table = TableEntity.findById (TableEntity.class, tableId);
-						table.delete ();
-						refreshTables ();
+					public void onClick(DialogInterface dialog, int which) {
+						TableEntity table = TableEntity.findById(TableEntity.class, tableId);
+						table.delete();
+						refreshTables();
 					}
 				});
-				adb.setNegativeButton (getString (android.R.string.no), new DialogInterface.OnClickListener ()
-				{
+				adb.setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
 					@Override
-					public void onClick (DialogInterface dialog, int which)
-					{
-						dialog.cancel ();
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
 					}
 				});
-				adb.show ();
-				return true;
+				adb.show();
 			}
 		});
 	}

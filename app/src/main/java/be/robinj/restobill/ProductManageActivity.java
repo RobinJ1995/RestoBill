@@ -7,9 +7,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.Switch;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -17,6 +20,8 @@ import java.util.List;
 
 import be.robinj.restobill.adapter.ProductAdapter;
 import be.robinj.restobill.listener.ManageProductAddOnClickListener;
+import be.robinj.restobill.listener.ProductAddPositiveListener;
+import be.robinj.restobill.listener.TableAddNegativeOnClickListener;
 import be.robinj.restobill.model.OrderEntity;
 import be.robinj.restobill.model.ProductEntity;
 
@@ -34,7 +39,7 @@ public class ProductManageActivity
 		setSupportActionBar (toolbar);
 		getSupportActionBar ().setDisplayHomeAsUpEnabled (true);
 
-		FloatingActionButton btnAddProduct = (FloatingActionButton) this.findViewById (R.id.btnAddProduct);
+		FloatingActionButton btnAddProduct = (FloatingActionButton) this.findViewById(R.id.btnAddProduct);
 		btnAddProduct.setOnClickListener
 			(
 				new View.OnClickListener ()
@@ -48,45 +53,67 @@ public class ProductManageActivity
 				}
 			);
 
-		GridView gvProducts = (GridView) this.findViewById (R.id.gvManageProducts);
+		GridView gvProducts = (GridView) this.findViewById(R.id.gvManageProducts);
 
 		List<ProductEntity> products = ProductEntity.find(ProductEntity.class, null, new String[]{}, null, "name", null);
 		//btnSubmitProducts.setOnClickListener (new ProductSubmitOnClickListener(this, this.selected, billId));
-		gvProducts.setAdapter (new ProductAdapter (this, products, this.selected));
-		gvProducts.setOnItemLongClickListener
-		(
-			new AdapterView.OnItemLongClickListener ()
-			{
-				@Override
-				public boolean onItemLongClick (AdapterView<?> parent, View view, int position, long id)
-				{
-					AlertDialog.Builder adb = new AlertDialog.Builder (ProductManageActivity.this);
-					adb.setTitle ("Remove product?");
-					final long prodId = (long) view.getTag ();
-					adb.setPositiveButton (getString (android.R.string.yes),
-						new DialogInterface.OnClickListener ()
-						{
-							@Override
-							public void onClick (DialogInterface dialog, int which)
-							{
+		gvProducts.setAdapter(new ProductAdapter(this, products, this.selected));
+		gvProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				AlertDialog.Builder adb = new AlertDialog.Builder(ProductManageActivity.this);
+				adb.setTitle("What do want to do?");
+				final long prodId = (long) view.getTag();
+				adb.setItems(new String[]{"Edit product", "Delete product"}, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						switch (which) {
+							case 0:
+								editProduct(prodId);
+								break;
+							case 1:
 								deleteProduct(prodId);
-							}
-						});
-					adb.setNegativeButton (getString (android.R.string.no), new DialogInterface.OnClickListener ()
-					{
-						@Override
-						public void onClick (DialogInterface dialog, int which)
-						{
-							dialog.dismiss ();
+								break;
 						}
-					});
-					adb.show ();
-
-					return true;
-				}
-
+					}
+				});
+				adb.setNegativeButton(getString(android.R.string.cancel), new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
+				adb.show();
 			}
-		);
+		});
+	}
+
+	public void editProduct(final long prodId) {
+		final ProductEntity product = ProductEntity.findById(ProductEntity.class, prodId);
+		android.app.AlertDialog.Builder dlgBuilder = new android.app.AlertDialog.Builder (this);
+		LayoutInflater inflater = this.getLayoutInflater();
+		View dlgView = inflater.inflate(R.layout.dialog_product_manage_add, null);
+		EditText etProdName = (EditText)dlgView.findViewById(R.id.etProdName);
+		etProdName.setText(product.name);
+
+		Switch swProdAvailable = (Switch)dlgView.findViewById(R.id.swProdAvailable);
+		swProdAvailable.setChecked(product.available);
+
+		EditText etProdPrice = (EditText)dlgView.findViewById(R.id.etProdPrice);
+		etProdPrice.setText(String.valueOf(product.price));
+
+		EditText etProdDesc = (EditText)dlgView.findViewById(R.id.etProdDesc);
+		etProdDesc.setText(product.description);
+
+		dlgBuilder
+				.setView(dlgView)
+				.setTitle("Edit product")
+				.setPositiveButton(R.string.dialog_tables_add_positive,
+						new ProductAddPositiveListener(this, dlgView, product))
+				.setNegativeButton("Cancel", new TableAddNegativeOnClickListener());
+
+		android.app.AlertDialog dialog = dlgBuilder.create ();
+		dialog.show ();
 	}
 
 	public void deleteProduct(final long prodId) {

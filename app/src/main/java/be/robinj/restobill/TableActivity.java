@@ -65,6 +65,8 @@ public class TableActivity
 		//noinspection SimplifiableIfStatement
 		if (id == R.id.action_settings)
 		{
+			Intent in = new Intent(TableActivity.this, SettingsActivity.class);
+			startActivity(in);
 			return true;
 		}
 		else if (id == R.id.action_manage)
