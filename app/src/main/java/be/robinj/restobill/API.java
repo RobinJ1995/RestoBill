@@ -371,4 +371,36 @@ public class API
 			ex.printStackTrace ();
 		}
 	}
+
+	public void removeTable (TableEntity table)
+	{
+		HashMap<String, String> parameters = new HashMap<String, String> ();
+		parameters.put ("id", String.valueOf (table.syncId));
+
+		this.doRequest ("removeTable.php", parameters);
+	}
+
+	public void removeProduct (ProductEntity product)
+	{
+		HashMap<String, String> parameters = new HashMap<String, String> ();
+		parameters.put ("id", String.valueOf (product.syncId));
+
+		this.doRequest ("removeProduct.php", parameters);
+	}
+
+	public void removeOrder (OrderEntity order)
+	{
+		HashMap<String, String> parameters = new HashMap<String, String> ();
+		parameters.put ("id", String.valueOf (order.syncId));
+
+		this.doRequest ("removeOrder.php", parameters);
+	}
+
+	public void removeBill (BillEntity bill)
+	{
+		HashMap<String, String> parameters = new HashMap<String, String> ();
+		parameters.put ("id", String.valueOf (bill.syncId));
+
+		this.doRequest ("removeBill.php", parameters);
+	}
 }

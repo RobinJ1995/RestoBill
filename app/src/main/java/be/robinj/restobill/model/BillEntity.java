@@ -103,4 +103,24 @@ public class BillEntity
 			thread.start ();
 		}
 	}
+
+	@Override
+	public void delete ()
+	{
+		super.delete ();
+
+		final BillEntity bill = this;
+
+		Runnable runnable = new Runnable ()
+		{
+			@Override
+			public void run ()
+			{
+				(new API ("http://10.0.2.2:8000/")).removeBill (bill);
+			}
+		};
+		Thread thread = new Thread (runnable);
+
+		thread.start ();
+	}
 }

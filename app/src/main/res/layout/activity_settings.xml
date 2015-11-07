@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Synchonisation Server:"
+        android:text="Synchonisation server:"
         android:id="@+id/tvSettingsServer" />
 
     <LinearLayout
@@ -54,6 +54,11 @@
             android:text="8000" />
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="The application needs to be restarted for changes to fully take effect!" />
 
 
 </LinearLayout>

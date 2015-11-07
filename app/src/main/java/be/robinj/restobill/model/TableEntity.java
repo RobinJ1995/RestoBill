@@ -60,4 +60,24 @@ public class TableEntity
 			thread.start ();
 		}
 	}
+
+	@Override
+	public void delete ()
+	{
+		super.delete ();
+
+		final TableEntity table = this;
+
+		Runnable runnable = new Runnable ()
+		{
+			@Override
+			public void run ()
+			{
+				(new API ("http://10.0.2.2:8000/")).removeTable (table);
+			}
+		};
+		Thread thread = new Thread (runnable);
+
+		thread.start ();
+	}
 }

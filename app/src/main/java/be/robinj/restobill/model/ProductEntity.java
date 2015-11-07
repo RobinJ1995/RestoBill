@@ -84,4 +84,24 @@ public class ProductEntity extends SugarRecord<ProductEntity>
 			thread.start ();
 		}
 	}
+
+	@Override
+	public void delete ()
+	{
+		super.delete ();
+
+		final ProductEntity product = this;
+
+		Runnable runnable = new Runnable ()
+		{
+			@Override
+			public void run ()
+			{
+				(new API ("http://10.0.2.2:8000/")).removeProduct (product);
+			}
+		};
+		Thread thread = new Thread (runnable);
+
+		thread.start ();
+	}
 }
