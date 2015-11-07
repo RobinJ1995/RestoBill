@@ -2,6 +2,7 @@ package be.robinj.restobill;
 
 import android.content.Context;
 import android.content.Entity;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -45,15 +46,20 @@ import be.robinj.restobill.model.TableEntity;
 public class API
 {
 	private String server;
+	private static API instance;
 
-	public API (String server)
+	public static API getInstance (Context context)
 	{
-		this.server = server;
+		if (API.instance == null)
+			API.instance = new API (context);
+
+		return API.instance;
 	}
 
-	public API (Context context)
+	private API (Context context)
 	{
-		this.server = context.getSharedPreferences ("prefs", Context.MODE_PRIVATE).getString ("server", "http://10.0.2.2:8000/");
+		SharedPreferences prefs = context.getSharedPreferences ("prefs", Context.MODE_PRIVATE);
+		this.server = "http://" + prefs.getString ("server_ip", "10.0.2.2") + ":" + prefs.getInt ("server_port", 8000) + "/";
 	}
 
 	private HttpResponse doRequest (String file, HashMap<String, String> parameters)

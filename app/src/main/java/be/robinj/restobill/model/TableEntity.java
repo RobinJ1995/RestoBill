@@ -52,7 +52,7 @@ public class TableEntity
 				@Override
 				public void run ()
 				{
-					(new API ("http://10.0.2.2:8000/")).saveTable (table);
+					API.getInstance (null).saveTable (table);
 				}
 			};
 			Thread thread = new Thread (runnable);
@@ -80,7 +80,7 @@ public class TableEntity
 				@Override
 				public void run ()
 				{
-					(new API ("http://10.0.2.2:8000/")).removeTable (table);
+					API.getInstance (null).removeTable (table);
 				}
 			};
 			Thread thread = new Thread (runnable);

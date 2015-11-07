@@ -96,7 +96,7 @@ public class BillEntity
 				@Override
 				public void run ()
 				{
-					(new API ("http://10.0.2.2:8000/")).saveBill (bill);
+					API.getInstance (null).saveBill (bill);
 				}
 			};
 			Thread thread = new Thread (runnable);
@@ -124,7 +124,7 @@ public class BillEntity
 				@Override
 				public void run ()
 				{
-					(new API ("http://10.0.2.2:8000/")).removeBill (bill);
+					API.getInstance (null).removeBill (bill);
 				}
 			};
 			Thread thread = new Thread (runnable);

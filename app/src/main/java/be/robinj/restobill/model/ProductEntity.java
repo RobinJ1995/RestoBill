@@ -76,7 +76,7 @@ public class ProductEntity extends SugarRecord<ProductEntity>
 				@Override
 				public void run ()
 				{
-					(new API ("http://10.0.2.2:8000/")).saveProduct (product);
+					API.getInstance (null).saveProduct (product);
 				}
 			};
 			Thread thread = new Thread (runnable);
@@ -104,7 +104,7 @@ public class ProductEntity extends SugarRecord<ProductEntity>
 				@Override
 				public void run ()
 				{
-					(new API ("http://10.0.2.2:8000/")).removeProduct (product);
+					API.getInstance (null).removeProduct (product);
 				}
 			};
 			Thread thread = new Thread (runnable);

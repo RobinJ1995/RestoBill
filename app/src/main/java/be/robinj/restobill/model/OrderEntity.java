@@ -56,7 +56,7 @@ public class OrderEntity
 				@Override
 				public void run ()
 				{
-					(new API ("http://10.0.2.2:8000/")).saveOrder (order);
+					API.getInstance (null).saveOrder (order);
 				}
 			};
 			Thread thread = new Thread (runnable);
@@ -84,7 +84,7 @@ public class OrderEntity
 				@Override
 				public void run ()
 				{
-					(new API ("http://10.0.2.2:8000/")).removeOrder (order);
+					API.getInstance (null).removeOrder (order);
 				}
 			};
 			Thread thread = new Thread (runnable);

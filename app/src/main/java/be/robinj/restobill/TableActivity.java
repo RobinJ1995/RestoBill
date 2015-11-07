@@ -56,7 +56,7 @@ public class TableActivity
 		gvTables.setOnItemLongClickListener (new TableGridViewOnItemLongClickListener (this));
 		gvTables.setOnItemClickListener (new TableGridViewOnItemClickListener (this));
 
-		(new API (this)).startSyncThread ();
+		API.getInstance (this).startSyncThread ();
 	}
 	
 	@Override
