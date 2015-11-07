@@ -51,7 +51,7 @@ public class TableActivity
 		GridView gvTables = (GridView) this.findViewById (R.id.gvTables);
 
 		btnAddTable.setOnClickListener (new TableAddOnClickListener (this));
-		gvTables.setAdapter (new TableAdapter (this, TableEntity.listAll (TableEntity.class)));
+		gvTables.setAdapter (new TableAdapter (this, TableEntity.listAll (TableEntity.class), true));
 		gvTables.setOnItemLongClickListener (new TableGridViewOnItemLongClickListener (this));
 		gvTables.setOnItemClickListener (new TableGridViewOnItemClickListener (this));
 

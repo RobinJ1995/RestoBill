@@ -31,6 +31,6 @@ public class TableGridViewOnItemClickListener
 		Intent intent = new Intent (this.parent, OrderActivity.class);
 		intent.putExtra ("tableId", id);
 
-		this.parent.startActivity (intent);
+		this.parent.startActivityForResult (intent, 1);
 	}
 }
