@@ -2,7 +2,7 @@
 require_once ('init.php');
 
 $query = $db->prepare ('SELECT COUNT(*) FROM `table` WHERE syncId = :id');
-$query->bindValue (':id', $_GET['id']);
+$query->bindValue (':id', $_POST['id']);
 $query->execute ();
 
 if ($query->fetchAll ()[0][0] > 0)

@@ -231,6 +231,21 @@ public class API
 
 			for (TableEntity table : tables)
 				table.save (false);
+
+			HttpResponse response2 = this.doRequest ("offerTables.php", parameters);
+			String strMissingIds = EntityUtils.toString (response2.getEntity ());
+			for (String strId : strMissingIds.split (","))
+			{
+				if (! strId.isEmpty ())
+				{
+					long id = Long.parseLong (strId);
+					Log.e ("missing", "syncId" + id);
+					List<TableEntity> list = TableEntity.find (TableEntity.class, "sync_id = ?", String.valueOf (id));
+
+					if (list.size () > 0)
+						list.get (0).save (true);
+				}
+			}
 		}
 		catch (Exception ex)
 		{
@@ -257,6 +272,20 @@ public class API
 
 			for (ProductEntity product : products)
 				product.save (false);
+
+			HttpResponse response2 = this.doRequest ("offerProducts.php", parameters);
+			String strMissingIds = EntityUtils.toString (response2.getEntity ());
+			for (String strId : strMissingIds.split (","))
+			{
+				if (! strId.isEmpty ())
+				{
+					long id = Long.parseLong (strId);
+					List<ProductEntity> list = ProductEntity.find (ProductEntity.class, "sync_id = ?", String.valueOf (id));
+
+					if (list.size () > 0)
+						list.get (0).save (true);
+				}
+			}
 		}
 		catch (Exception ex)
 		{
@@ -283,6 +312,20 @@ public class API
 
 			for (OrderEntity order : orders)
 				order.save (false);
+
+			HttpResponse response2 = this.doRequest ("offerOrders.php", parameters);
+			String strMissingIds = EntityUtils.toString (response2.getEntity ());
+			for (String strId : strMissingIds.split (","))
+			{
+				if (! strId.isEmpty ())
+				{
+					long id = Long.parseLong (strId);
+					List<OrderEntity> list = ProductEntity.find (OrderEntity.class, "sync_id = ?", String.valueOf (id));
+
+					if (list.size () > 0)
+						list.get (0).save (true);
+				}
+			}
 		}
 		catch (Exception ex)
 		{
@@ -309,6 +352,20 @@ public class API
 
 			for (BillEntity bill : bills)
 				bill.save (false);
+
+			HttpResponse response2 = this.doRequest ("offerBills.php", parameters);
+			String strMissingIds = EntityUtils.toString (response2.getEntity ());
+			for (String strId : strMissingIds.split (","))
+			{
+				if (! strId.isEmpty ())
+				{
+					long id = Long.parseLong (strId);
+					List<BillEntity> list = BillEntity.find (BillEntity.class, "sync_id = ?", String.valueOf (id));
+
+					if (list.size () > 0)
+						list.get (0).save (true);
+				}
+			}
 		}
 		catch (Exception ex)
 		{
