@@ -166,8 +166,8 @@ public class API
 	{
 		HashMap<String, String> parameters = new HashMap<String, String> ();
 		parameters.put ("id", String.valueOf (order.getId ()));
-		parameters.put ("product_id", String.valueOf (order.productEntity));
-		parameters.put ("bill_id", String.valueOf (order.billEntity));
+		parameters.put ("product_id", String.valueOf (order.productEntity.getId ()));
+		parameters.put ("bill_id", String.valueOf (order.billEntity.getId ()));
 		parameters.put ("amount", String.valueOf (order.amount));
 		parameters.put ("syncId", String.valueOf (order.syncId));
 
@@ -178,7 +178,7 @@ public class API
 	{
 		HashMap<String, String> parameters = new HashMap<String, String> ();
 		parameters.put ("id", String.valueOf (bill.getId ()));
-		parameters.put ("table_id", String.valueOf (bill.tableEntity));
+		parameters.put ("table_id", String.valueOf (bill.tableEntity.getId ()));
 		parameters.put ("closed", bill.closed ? "1" : "0");
 		parameters.put ("syncId", String.valueOf (bill.syncId));
 
