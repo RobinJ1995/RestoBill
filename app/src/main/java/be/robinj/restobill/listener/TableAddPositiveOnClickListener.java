@@ -20,11 +20,17 @@ public class TableAddPositiveOnClickListener
 {
 	private Activity parent;
 	private View dlgView;
+	private TableEntity editTable;
 
 	public TableAddPositiveOnClickListener (Activity parent, View dlgView)
 	{
 		this.parent = parent;
 		this.dlgView = dlgView;
+	}
+
+	public TableAddPositiveOnClickListener (Activity parent, View dlgView, TableEntity _editTable) {
+		this(parent, dlgView);
+		editTable = _editTable;
 	}
 
 	@Override
@@ -56,15 +62,24 @@ public class TableAddPositiveOnClickListener
 		}
 		else
 		{
-			TableEntity table = new TableEntity (name);
+			TableEntity table = editTable;
+			String message = "Tabled edited";
+			if(table == null) {
+				table = new TableEntity();
+				message = "Table added";
+			}
+			table.name = name;
 			table.save ();
 
-			if (this.parent instanceof TableActivity)
-				((TableActivity) this.parent).refreshTables ();
-			else
-				((TableManageActivity) this.parent).refreshTables ();
+			if (this.parent instanceof TableActivity) {
+				((TableActivity) this.parent).refreshTables();
+				Snackbar.make (this.parent.findViewById (R.id.colaTables), message, Snackbar.LENGTH_SHORT).show();
+			} else {
+				((TableManageActivity) this.parent).refreshTables();
+				Snackbar.make (this.parent.findViewById (R.id.colaManageTables), message, Snackbar.LENGTH_SHORT).show ();
+			}
 
-			Snackbar.make (this.parent.findViewById (R.id.colaTables), "Table added", Snackbar.LENGTH_SHORT).show ();
+			//
 		}
 	}
 }
