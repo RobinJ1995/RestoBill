@@ -1,5 +1,6 @@
 package be.robinj.restobill;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,7 +30,7 @@ public class SettingsActivity extends AppCompatActivity {
         EditText etIp = (EditText)findViewById(R.id.etSettingsHost);
         EditText etPort = (EditText)findViewById(R.id.etSettingsPort);
 
-        SharedPreferences sp = getSP();
+        SharedPreferences sp = getSP(this);
         final SharedPreferences.Editor editor = sp.edit();
         currency = sp.getString("currency", "€");
         ip = sp.getString("server_ip", "10.0.2.2");
@@ -96,12 +97,16 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
-    public SharedPreferences getSP() {
-        return this.getSharedPreferences("prefs", MODE_PRIVATE);
+    public static SharedPreferences getSP(Context context) {
+        return context.getSharedPreferences("prefs", MODE_PRIVATE);
+    }
+
+    public static String getCurrency(Context context) {
+        return getSP(context).getString("currency", "€");
     }
 
     public void save() {
-        SharedPreferences sp = getSP();
+        SharedPreferences sp = getSP(this);
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("currency", currency);
         editor.putString("server_ip", ip);

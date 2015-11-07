@@ -1,6 +1,7 @@
 package be.robinj.restobill.adapter;
 
 import android.content.Context;
+import android.media.audiofx.BassBoost;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import be.robinj.restobill.R;
+import be.robinj.restobill.SettingsActivity;
 import be.robinj.restobill.model.OrderEntity;
 
 /**
@@ -21,7 +23,7 @@ public class OrderAdapter
 {
 	public OrderAdapter (Context context, List<OrderEntity> orders)
 	{
-		super (context, R.layout.order_listview_item, orders);
+		super(context, R.layout.order_listview_item, orders);
 	}
 
 	@Override
@@ -37,11 +39,13 @@ public class OrderAdapter
 		TextView tvOrderListViewItemAmount = (TextView) view.findViewById (R.id.tvOrderListViewItemAmount);
 
 		tvOrderListViewItemProductName.setText (order.productEntity.name);
-		tvOrderListViewItemProductPrice.setText ("€" + (new DecimalFormat ("0.00")).format (order.getPrice ()));
+		tvOrderListViewItemProductPrice.setText (SettingsActivity.getCurrency(getContext()) + (new DecimalFormat ("0.00")).format (order.getPrice ()));
 		tvOrderListViewItemAmount.setText (order.amount == 1 ? "" : "x" + order.amount);
 
-		view.setTag (order.getId ());
+		view.setTag(order.getId());
 
 		return view;
 	}
+
+
 }
