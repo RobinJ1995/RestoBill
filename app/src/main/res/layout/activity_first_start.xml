@@ -11,18 +11,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Welcome to RestoBill. Firstly create some tables"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Welcome. Since this is the first time you run the app, you don't have any tables yet."
         android:id="@+id/tvFirstWelcome"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="How many tables do you want to create?"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="How many tables do you need?"
         android:id="@+id/tvFirstTables"
         android:layout_below="@+id/tvFirstWelcome"
         android:layout_alignParentLeft="true"

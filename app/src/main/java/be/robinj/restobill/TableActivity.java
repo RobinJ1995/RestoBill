@@ -16,6 +16,7 @@ import be.robinj.restobill.adapter.TableAdapter;
 import be.robinj.restobill.listener.TableAddOnClickListener;
 import be.robinj.restobill.listener.TableGridViewOnItemClickListener;
 import be.robinj.restobill.listener.TableGridViewOnItemLongClickListener;
+import be.robinj.restobill.model.BillEntity;
 import be.robinj.restobill.model.TableEntity;
 
 public class TableActivity
@@ -35,7 +36,7 @@ public class TableActivity
 		super.onCreate (savedInstanceState);
 
 		this.setContentView (R.layout.activity_table);
-		showFirstStartSettings ();
+		this.showFirstStartSettings ();
 
 		Toolbar toolbar = (Toolbar) findViewById (R.id.toolbar);
 		this.setSupportActionBar (toolbar);
@@ -80,7 +81,8 @@ public class TableActivity
 			Intent in = new Intent (TableActivity.this, SettingsActivity.class);
 			startActivity (in);
 			return true;
-		} else if (id == R.id.action_manage)
+		}
+		else if (id == R.id.action_manage)
 		{
 			AlertDialog.Builder alertDialog = new AlertDialog.Builder (this);
 			alertDialog
@@ -136,5 +138,13 @@ public class TableActivity
 			Intent in = new Intent (this, FirstStartActivity.class);
 			startActivityForResult (in, 1);
 		}
+	}
+
+	@Override
+	public void onResume ()
+	{
+		super.onResume ();
+
+		this.refreshTables ();
 	}
 }

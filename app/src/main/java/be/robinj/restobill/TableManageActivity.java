@@ -99,7 +99,7 @@ public class TableManageActivity
 		LayoutInflater inflater = this.getLayoutInflater();
 		View dlgView = inflater.inflate(R.layout.dialog_table_add, null);
 
-		EditText etTableName = (EditText)dlgView.findViewById(R.id.etTableAddName);
+		EditText etTableName = (EditText)dlgView.findViewById (R.id.etTableAddName);
 		etTableName.setText(table.name);
 
 		dlgBuilder
@@ -107,7 +107,7 @@ public class TableManageActivity
 				.setTitle("Edit table")
 				.setPositiveButton(R.string.dialog_tables_add_positive,
 						new TableAddPositiveOnClickListener(this, dlgView, table))
-				.setNegativeButton("Cancel", new TableAddNegativeOnClickListener());
+				.setNegativeButton ("Cancel", new TableAddNegativeOnClickListener ());
 
 		android.app.AlertDialog dialog = dlgBuilder.create ();
 		dialog.show ();
@@ -116,7 +116,7 @@ public class TableManageActivity
 	public void deleteTable(final long _tableId)
 	{
 		TableEntity table = TableEntity.findById(TableEntity.class, _tableId);
-		table.delete();
+		table.delete ();
 		refreshTables ();
 
 		Snackbar.make (this.findViewById (R.id.colaManageTables), "Table removed", Snackbar.LENGTH_SHORT).show ();
@@ -130,5 +130,13 @@ public class TableManageActivity
 		adapter.clear ();
 		adapter.addAll (TableEntity.listAll (TableEntity.class));
 		adapter.notifyDataSetChanged ();
+	}
+
+	@Override
+	public void onResume ()
+	{
+		super.onResume ();
+
+		this.refreshTables ();
 	}
 }

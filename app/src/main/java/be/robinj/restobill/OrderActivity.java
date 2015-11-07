@@ -140,12 +140,24 @@ public class OrderActivity
 
 	public void refreshTotalPrice (List<OrderEntity> orders)
 	{
-		MenuItem action_checkout = this.menu.findItem (R.id.action_checkout);
+		if (this.menu != null)
+		{
+			MenuItem action_checkout = this.menu.findItem (R.id.action_checkout);
 
-		float totalPrice = 0F;
-		for (OrderEntity order : orders)
-			totalPrice += order.getPrice ();
+			float totalPrice = 0F;
+			for (OrderEntity order : orders)
+				totalPrice += order.getPrice ();
 
-		action_checkout.setTitle ("€" + new DecimalFormat ("0.00").format (totalPrice));
+			action_checkout.setTitle ("€" + new DecimalFormat ("0.00").format (totalPrice));
+		}
+	}
+
+	@Override
+	public void onResume ()
+	{
+		super.onResume ();
+
+		this.refreshOrders ();
+		this.refreshTotalPrice ();
 	}
 }

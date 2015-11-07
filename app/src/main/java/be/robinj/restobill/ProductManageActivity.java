@@ -181,4 +181,14 @@ public class ProductManageActivity
 		adapter.addAll (ProductEntity.listAll (ProductEntity.class));
 		adapter.notifyDataSetChanged ();
 	}
+
+
+
+	@Override
+	public void onResume ()
+	{
+		super.onResume ();
+
+		this.refreshProducts ();
+	}
 }

@@ -64,20 +64,28 @@ public class TableEntity
 	@Override
 	public void delete ()
 	{
+		this.delete (true);
+	}
+
+	public void delete (boolean sync)
+	{
 		super.delete ();
 
-		final TableEntity table = this;
-
-		Runnable runnable = new Runnable ()
+		if (sync)
 		{
-			@Override
-			public void run ()
-			{
-				(new API ("http://10.0.2.2:8000/")).removeTable (table);
-			}
-		};
-		Thread thread = new Thread (runnable);
+			final TableEntity table = this;
 
-		thread.start ();
+			Runnable runnable = new Runnable ()
+			{
+				@Override
+				public void run ()
+				{
+					(new API ("http://10.0.2.2:8000/")).removeTable (table);
+				}
+			};
+			Thread thread = new Thread (runnable);
+
+			thread.start ();
+		}
 	}
 }

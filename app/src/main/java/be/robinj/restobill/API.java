@@ -18,6 +18,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Array;
@@ -191,6 +192,8 @@ public class API
 				{
 					try
 					{
+						self.checkRemovals ();
+
 						self.syncTables ();
 						self.syncProducts ();
 						self.syncOrders ();
@@ -402,5 +405,82 @@ public class API
 		parameters.put ("id", String.valueOf (bill.syncId));
 
 		this.doRequest ("removeBill.php", parameters);
+	}
+
+	public void checkRemovals () throws IOException // Dirty hack... but no time to find a better way //
+	{
+		try
+		{
+			HttpResponse response = this.doRequest ("removals.log", new HashMap<String, String> ());
+
+			String strResponse = EntityUtils.toString (response.getEntity ());
+
+			for (String line : strResponse.split ("\n"))
+			{
+				String[] parts = line.split (":", 3);
+
+				switch (parts[0])
+				{
+					case "table":
+					{
+						List<TableEntity> entities = TableEntity.find (TableEntity.class, "sync_id = ? AND name = ?", parts[1], parts[2]);
+						for (TableEntity entity : entities)
+							entity.delete (false);
+
+						break;
+					}
+					case "product":
+					{
+						List<ProductEntity> entities = ProductEntity.find (ProductEntity.class, "sync_id = ? AND name = ?", parts[1], parts[2]);
+
+						if (entities.size () > 0)
+						{
+							ProductEntity product = entities.get (0);
+
+							List<OrderEntity> orders = OrderEntity.find (OrderEntity.class, "product_entity = ?", String.valueOf (product.syncId));
+
+							for (OrderEntity order : orders)
+								order.delete (false);
+						}
+
+						for (ProductEntity entity : entities)
+							entity.delete (false);
+
+						break;
+					}
+					case "order":
+					{
+						List<OrderEntity> entities = OrderEntity.find (OrderEntity.class, "sync_id = ? AND bill_entity = ?", parts[1], parts[2]);
+						for (OrderEntity entity : entities)
+							entity.delete (false);
+
+						break;
+					}
+					case "bill":
+					{
+						List<BillEntity> entities = BillEntity.find (BillEntity.class, "sync_id = ? AND table_entity = ?", parts[1], parts[2]);
+
+						if (entities.size () > 0)
+						{
+							BillEntity bill = entities.get (0);
+
+							List<OrderEntity> orders = OrderEntity.find (OrderEntity.class, "bill_entity = ?", String.valueOf (bill.syncId));
+
+							for (OrderEntity order : orders)
+								order.delete (false);
+						}
+
+						for (BillEntity entity : entities)
+							entity.delete (false);
+
+						break;
+					}
+				}
+			}
+		}
+		catch (Exception ex) // Don't want this part to hold up the whole sync thread //
+		{
+			ex.printStackTrace ();
+		}
 	}
 }

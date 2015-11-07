@@ -107,20 +107,28 @@ public class BillEntity
 	@Override
 	public void delete ()
 	{
+		this.delete (true);
+	}
+
+	public void delete (boolean sync)
+	{
 		super.delete ();
 
-		final BillEntity bill = this;
-
-		Runnable runnable = new Runnable ()
+		if (sync)
 		{
-			@Override
-			public void run ()
-			{
-				(new API ("http://10.0.2.2:8000/")).removeBill (bill);
-			}
-		};
-		Thread thread = new Thread (runnable);
+			final BillEntity bill = this;
 
-		thread.start ();
+			Runnable runnable = new Runnable ()
+			{
+				@Override
+				public void run ()
+				{
+					(new API ("http://10.0.2.2:8000/")).removeBill (bill);
+				}
+			};
+			Thread thread = new Thread (runnable);
+
+			thread.start ();
+		}
 	}
 }
